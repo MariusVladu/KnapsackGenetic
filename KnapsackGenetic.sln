@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.Algorithm.U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.Tests.Common", "Tests\KnapsackGenetic.Tests.Common\KnapsackGenetic.Tests.Common.csproj", "{3F0195B6-1DE9-4B3B-9CF2-C23071827DD6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.UI", "KnapsackGenetic.UI\KnapsackGenetic.UI.csproj", "{32F79AB5-36CD-4F8C-A781-0432915D80A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{3F0195B6-1DE9-4B3B-9CF2-C23071827DD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F0195B6-1DE9-4B3B-9CF2-C23071827DD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F0195B6-1DE9-4B3B-9CF2-C23071827DD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32F79AB5-36CD-4F8C-A781-0432915D80A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32F79AB5-36CD-4F8C-A781-0432915D80A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32F79AB5-36CD-4F8C-A781-0432915D80A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32F79AB5-36CD-4F8C-A781-0432915D80A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

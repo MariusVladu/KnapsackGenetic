@@ -12,7 +12,7 @@ namespace KnapsackGenetic.Algorithm
 
         public Individual SelectOne(List<Solution> solutions)
         {
-            var totalScore = solutions.Select(x => x.FitnessScore).Sum();
+            var totalScore = solutions.Sum(x => x.FitnessScore);
             var probabilities = solutions.Select(x => (double)x.FitnessScore / totalScore).ToArray();
 
             var cumulativeProbabilities = new double[solutions.Count];

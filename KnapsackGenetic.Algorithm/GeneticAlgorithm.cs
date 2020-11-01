@@ -2,6 +2,7 @@
 using KnapsackGenetic.Domain;
 using KnapsackGenetic.Providers.Contracts;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace KnapsackGenetic.Algorithm
 {
@@ -16,7 +17,9 @@ namespace KnapsackGenetic.Algorithm
         private readonly Settings settings;
 
         private List<Individual> currentPopulation;
-        private List<Solution> currentSolutions;
+        public List<Solution> CurrentSolutions;
+        public int CurrentGenerationNumber;
+        public double AverageScore;
 
         public GeneticAlgorithm(Settings settings,
             IInitialPopulationProvider initialPopulationProvider,
@@ -34,22 +37,21 @@ namespace KnapsackGenetic.Algorithm
             this.mutationOperator = mutationOperator;
 
             currentPopulation = initialPopulationProvider.GetInitialPopulation(settings.InitialPopulationSize, settings.NumberOfGenes);
-            currentSolutions = GetCurrentSolutions();
+            CurrentSolutions = GetCurrentSolutions();
+            CurrentGenerationNumber = 1;
+            ComputeAverageScore();
         }
 
         public List<Solution> ComputeNextGeneration()
         {
             var nextGeneration = new List<Individual>();
 
-            var numberOfCrossovers = currentSolutions.Count / 2 - settings.NumberOfElites;
+            var numberOfCrossovers = CurrentSolutions.Count / 2 - settings.NumberOfElites;
 
             for (int i = 0; i < numberOfCrossovers; i++)
             {
-                var parent1 = selectionOperator.SelectOne(currentSolutions);
-                RemoveFromCurrentSolutions(parent1);
-
-                var parent2 = selectionOperator.SelectOne(currentSolutions);
-                RemoveFromCurrentSolutions(parent2);
+                var parent1 = selectionOperator.SelectOne(CurrentSolutions);
+                var parent2 = selectionOperator.SelectOne(CurrentSolutions);
 
                 var offsprings = crossoverOperator.GetOffsprings(parent1, parent2, settings.CrossoverRate);
 
@@ -60,30 +62,36 @@ namespace KnapsackGenetic.Algorithm
                 nextGeneration.Add(offsprings.Item2);
             }
 
-            AddFirstTwoRemainingElites(nextGeneration);
+            AddRemainingElites(nextGeneration);
 
             currentPopulation = nextGeneration;
-            currentSolutions = GetCurrentSolutions();
+            CurrentSolutions = GetCurrentSolutions();
+            CurrentGenerationNumber++;
+            ComputeAverageScore();
 
-            return currentSolutions;
+            return CurrentSolutions;
         }
 
-        private void AddFirstTwoRemainingElites(List<Individual> nextGeneration)
+        private void AddRemainingElites(List<Individual> nextGeneration)
         {
-            for (int i = 0; i < settings.NumberOfElites; i++)
+            for (int i = 0; i <= settings.NumberOfElites; i++)
             {
-                var elite = elitistSelection.SelectOne(currentSolutions);
-                RemoveFromCurrentSolutions(elite);
+                var elite = elitistSelection.SelectOne(CurrentSolutions);
 
                 nextGeneration.Add(elite);
             }
         }
 
+        private void ComputeAverageScore()
+        {
+            AverageScore = CurrentSolutions.Average(s => s.FitnessScore);
+        }
+
         private void RemoveFromCurrentSolutions(Individual individual)
         {
-            var indexToRemove = currentSolutions.FindIndex(s => s.Individual == individual);
+            var indexToRemove = CurrentSolutions.FindIndex(s => s.Individual == individual);
 
-            currentSolutions.RemoveAt(indexToRemove);
+            CurrentSolutions.RemoveAt(indexToRemove);
         }
 
         private List<Solution> GetCurrentSolutions()
