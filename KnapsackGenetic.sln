@@ -9,6 +9,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.Domain", "K
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.Providers", "KnapsackGenetic.Providers\KnapsackGenetic.Providers.csproj", "{FD0E11A1-8A4E-46EB-BF64-5F74B33C6148}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4162EB8F-E53B-472D-9DE8-1046C9F6ACF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.Providers.UnitTests", "Tests\KnapsackGenetic.Providers.UnitTests\KnapsackGenetic.Providers.UnitTests.csproj", "{AA0AFCEE-8C15-46DE-B798-7E91084DF921}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.Algorithm.UnitTests", "Tests\KnapsackGenetic.Algorithm.UnitTests\KnapsackGenetic.Algorithm.UnitTests.csproj", "{0AA7060B-790E-4CE1-A7BE-2BEA221F3747}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.Tests.Common", "Tests\KnapsackGenetic.Tests.Common\KnapsackGenetic.Tests.Common.csproj", "{3F0195B6-1DE9-4B3B-9CF2-C23071827DD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +35,26 @@ Global
 		{FD0E11A1-8A4E-46EB-BF64-5F74B33C6148}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD0E11A1-8A4E-46EB-BF64-5F74B33C6148}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD0E11A1-8A4E-46EB-BF64-5F74B33C6148}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA0AFCEE-8C15-46DE-B798-7E91084DF921}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA0AFCEE-8C15-46DE-B798-7E91084DF921}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA0AFCEE-8C15-46DE-B798-7E91084DF921}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA0AFCEE-8C15-46DE-B798-7E91084DF921}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AA7060B-790E-4CE1-A7BE-2BEA221F3747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AA7060B-790E-4CE1-A7BE-2BEA221F3747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AA7060B-790E-4CE1-A7BE-2BEA221F3747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AA7060B-790E-4CE1-A7BE-2BEA221F3747}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F0195B6-1DE9-4B3B-9CF2-C23071827DD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F0195B6-1DE9-4B3B-9CF2-C23071827DD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F0195B6-1DE9-4B3B-9CF2-C23071827DD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F0195B6-1DE9-4B3B-9CF2-C23071827DD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AA0AFCEE-8C15-46DE-B798-7E91084DF921} = {4162EB8F-E53B-472D-9DE8-1046C9F6ACF2}
+		{0AA7060B-790E-4CE1-A7BE-2BEA221F3747} = {4162EB8F-E53B-472D-9DE8-1046C9F6ACF2}
+		{3F0195B6-1DE9-4B3B-9CF2-C23071827DD6} = {4162EB8F-E53B-472D-9DE8-1046C9F6ACF2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E1752193-C3C6-481A-A798-D1366D4F22AD}
