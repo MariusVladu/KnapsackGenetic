@@ -31,10 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.buttonNextGeneration = new System.Windows.Forms.Button();
             this.chartAverageScore = new ScottPlot.FormsPlot();
-            this.labelGenerationsInfo = new System.Windows.Forms.Label();
+            this.labelGenerationInfo = new System.Windows.Forms.Label();
             this.buttonRun = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.inputGenerationsNumber = new System.Windows.Forms.NumericUpDown();
+            this.chartBestScore = new ScottPlot.FormsPlot();
             ((System.ComponentModel.ISupportInitialize)(this.inputGenerationsNumber)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,17 +54,17 @@
             this.chartAverageScore.Location = new System.Drawing.Point(13, 41);
             this.chartAverageScore.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chartAverageScore.Name = "chartAverageScore";
-            this.chartAverageScore.Size = new System.Drawing.Size(583, 404);
+            this.chartAverageScore.Size = new System.Drawing.Size(568, 327);
             this.chartAverageScore.TabIndex = 1;
             // 
-            // labelGenerationsInfo
+            // labelGenerationInfo
             // 
-            this.labelGenerationsInfo.AutoSize = true;
-            this.labelGenerationsInfo.Location = new System.Drawing.Point(603, 56);
-            this.labelGenerationsInfo.Name = "labelGenerationsInfo";
-            this.labelGenerationsInfo.Size = new System.Drawing.Size(70, 15);
-            this.labelGenerationsInfo.TabIndex = 2;
-            this.labelGenerationsInfo.Text = "Generations";
+            this.labelGenerationInfo.AutoSize = true;
+            this.labelGenerationInfo.Location = new System.Drawing.Point(603, 56);
+            this.labelGenerationInfo.Name = "labelGenerationInfo";
+            this.labelGenerationInfo.Size = new System.Drawing.Size(108, 15);
+            this.labelGenerationInfo.TabIndex = 2;
+            this.labelGenerationInfo.Text = "Current Generation";
             // 
             // buttonRun
             // 
@@ -101,15 +102,24 @@
             0,
             0});
             // 
+            // chartBestScore
+            // 
+            this.chartBestScore.Location = new System.Drawing.Point(13, 374);
+            this.chartBestScore.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.chartBestScore.Name = "chartBestScore";
+            this.chartBestScore.Size = new System.Drawing.Size(568, 327);
+            this.chartBestScore.TabIndex = 6;
+            // 
             // KnapsackGenetic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1150, 549);
+            this.ClientSize = new System.Drawing.Size(960, 736);
+            this.Controls.Add(this.chartBestScore);
             this.Controls.Add(this.inputGenerationsNumber);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonRun);
-            this.Controls.Add(this.labelGenerationsInfo);
+            this.Controls.Add(this.labelGenerationInfo);
             this.Controls.Add(this.chartAverageScore);
             this.Controls.Add(this.buttonNextGeneration);
             this.Name = "KnapsackGenetic";
@@ -124,10 +134,11 @@
 
         private System.Windows.Forms.Button buttonNextGeneration;
         private ScottPlot.FormsPlot chartAverageScore;
-        private System.Windows.Forms.Label labelGenerationsInfo;
+        private System.Windows.Forms.Label labelGenerationInfo;
         private System.Windows.Forms.Button buttonRun;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown inputGenerationsNumber;
+        private ScottPlot.FormsPlot chartBestScore;
     }
 }
 

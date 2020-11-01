@@ -6,6 +6,7 @@ using KnapsackGenetic.Providers.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace KnapsackGenetic.UI
@@ -24,12 +25,13 @@ namespace KnapsackGenetic.UI
         private int numberOfGenes;
         private int weightLimit = 30;
         private int numberOfElites = 1;
-        private int initialPopulationSize = 20;
+        private int initialPopulationSize = 50;
         private double crossoverRate = 0.5;
-        private double mutationRate = 0.1;
+        private double mutationRate = 0.05;
 
         private List<double> generationsPlotData;
         private List<double> averageScorePlotData;
+        private List<double> bestScorePlotData;
 
         public KnapsackGenetic()
         {
@@ -60,6 +62,8 @@ namespace KnapsackGenetic.UI
 
             chartAverageScore.plt.XLabel("Generation #");
             chartAverageScore.plt.YLabel("Average Fitness Score");
+            chartBestScore.plt.XLabel("Generation #");
+            chartBestScore.plt.YLabel("Best Fitness Score");
             Plot();
         }
 
@@ -69,6 +73,7 @@ namespace KnapsackGenetic.UI
 
             generationsPlotData = new List<double>();
             averageScorePlotData = new List<double>();
+            bestScorePlotData = new List<double>();
             UpdatePlotData();
         }
 
@@ -102,19 +107,31 @@ namespace KnapsackGenetic.UI
         {
             generationsPlotData.Add(geneticAlgorithm.CurrentGenerationNumber);
             averageScorePlotData.Add(geneticAlgorithm.AverageScore);
+            bestScorePlotData.Add(geneticAlgorithm.CurrentBestSolution.FitnessScore);
         }
 
         private void Plot()
         {
+            var generationsPlotArray = generationsPlotData.ToArray();
+
             chartAverageScore.plt.Clear();
-            chartAverageScore.plt.PlotScatter(generationsPlotData.ToArray(), averageScorePlotData.ToArray(), Color.Blue);
+            chartAverageScore.plt.PlotScatter(generationsPlotArray, averageScorePlotData.ToArray(), Color.Blue);
             chartAverageScore.plt.AxisAuto();
             chartAverageScore.Render();
 
-            //var bestSolution = geneticAlgorithm.CurrentSolutions.OrderByDescending(s => s.FitnessScore).First();
-            //var generationNumberString = geneticAlgorithm.CurrentGenerationNumber.ToString().PadLeft(4, '0'); ;
-            //var averageScore2DecimalPlaces = string.Format("0:00:00", geneticAlgorithm.AverageScore);
-            //labelGenerationsInfo.Text += $"\nGeneration #{generationNumberString} - Average: {averageScore2DecimalPlaces} Best Solution: {bestSolution}";
+            chartBestScore.plt.Clear();
+            chartBestScore.plt.PlotScatter(generationsPlotArray, bestScorePlotData.ToArray(), Color.Green);
+            chartBestScore.plt.AxisAuto();
+            chartBestScore.Render();
+
+            ShowBestSolution();
+        }
+
+        private void ShowBestSolution()
+        {
+            var generationNumberString = geneticAlgorithm.CurrentGenerationNumber.ToString().PadLeft(4, '0'); ;
+            var averageScore2DecimalPlaces = string.Format("{0:00.00}", geneticAlgorithm.AverageScore);
+            labelGenerationInfo.Text = $"Generation #{generationNumberString}\nAverage: {averageScore2DecimalPlaces}\nBest Solution: {geneticAlgorithm.CurrentBestSolution}";
         }
 
         private void buttonRun_Click(object sender, EventArgs e)
@@ -129,6 +146,8 @@ namespace KnapsackGenetic.UI
 
                 if (i % 50 == 0) Plot();
             }
+
+            Plot();
         }
     }
 }

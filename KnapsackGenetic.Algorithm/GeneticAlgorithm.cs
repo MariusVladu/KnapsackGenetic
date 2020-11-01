@@ -1,6 +1,7 @@
 ﻿using KnapsackGenetic.Algorithm.Contracts;
 using KnapsackGenetic.Domain;
 using KnapsackGenetic.Providers.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,6 +14,7 @@ namespace KnapsackGenetic.Algorithm
         private readonly ISelectionOperator elitistSelection;
         private readonly ICrossoverOperator crossoverOperator;
         private readonly IMutationOperator mutationOperator;
+        private static readonly Random random = new Random();
 
         private readonly Settings settings;
 
@@ -20,6 +22,7 @@ namespace KnapsackGenetic.Algorithm
         public List<Solution> CurrentSolutions;
         public int CurrentGenerationNumber;
         public double AverageScore;
+        public Solution CurrentBestSolution;
 
         public GeneticAlgorithm(Settings settings,
             IInitialPopulationProvider initialPopulationProvider,
@@ -37,16 +40,14 @@ namespace KnapsackGenetic.Algorithm
             this.mutationOperator = mutationOperator;
 
             currentPopulation = initialPopulationProvider.GetInitialPopulation(settings.InitialPopulationSize, settings.NumberOfGenes);
-            CurrentSolutions = GetCurrentSolutions();
-            CurrentGenerationNumber = 1;
-            ComputeAverageScore();
+            ComputeCurrentGenerationData();
         }
 
         public List<Solution> ComputeNextGeneration()
         {
             var nextGeneration = new List<Individual>();
 
-            var numberOfCrossovers = CurrentSolutions.Count / 2 - settings.NumberOfElites;
+            var numberOfCrossovers = CurrentSolutions.Count / 2;
 
             for (int i = 0; i < numberOfCrossovers; i++)
             {
@@ -62,21 +63,29 @@ namespace KnapsackGenetic.Algorithm
                 nextGeneration.Add(offsprings.Item2);
             }
 
-            AddRemainingElites(nextGeneration);
+            AddElites(nextGeneration);
 
             currentPopulation = nextGeneration;
-            CurrentSolutions = GetCurrentSolutions();
-            CurrentGenerationNumber++;
-            ComputeAverageScore();
+            ComputeCurrentGenerationData();
 
             return CurrentSolutions;
         }
 
-        private void AddRemainingElites(List<Individual> nextGeneration)
+        private void ComputeCurrentGenerationData()
+        {
+            CurrentGenerationNumber++;
+            CurrentSolutions = GetCurrentSolutions();
+            ComputeAverageScore();
+            ComputeCurrentBestSolution();
+        }
+
+        private void AddElites(List<Individual> nextGeneration)
         {
             for (int i = 0; i <= settings.NumberOfElites; i++)
             {
                 var elite = elitistSelection.SelectOne(CurrentSolutions);
+
+                nextGeneration.RemoveAt(random.Next(nextGeneration.Count));
 
                 nextGeneration.Add(elite);
             }
@@ -85,6 +94,11 @@ namespace KnapsackGenetic.Algorithm
         private void ComputeAverageScore()
         {
             AverageScore = CurrentSolutions.Average(s => s.FitnessScore);
+        }
+
+        private void ComputeCurrentBestSolution()
+        {
+            CurrentBestSolution = CurrentSolutions.OrderByDescending(s => s.FitnessScore).First();
         }
 
         private void RemoveFromCurrentSolutions(Individual individual)
