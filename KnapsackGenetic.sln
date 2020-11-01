@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.Algorithm",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.Domain", "KnapsackGenetic.Domain\KnapsackGenetic.Domain.csproj", "{00077077-A83C-4425-9BB2-C7AA39D62CAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.Providers", "KnapsackGenetic.Providers\KnapsackGenetic.Providers.csproj", "{FD0E11A1-8A4E-46EB-BF64-5F74B33C6148}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{00077077-A83C-4425-9BB2-C7AA39D62CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00077077-A83C-4425-9BB2-C7AA39D62CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00077077-A83C-4425-9BB2-C7AA39D62CAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD0E11A1-8A4E-46EB-BF64-5F74B33C6148}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD0E11A1-8A4E-46EB-BF64-5F74B33C6148}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD0E11A1-8A4E-46EB-BF64-5F74B33C6148}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD0E11A1-8A4E-46EB-BF64-5F74B33C6148}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

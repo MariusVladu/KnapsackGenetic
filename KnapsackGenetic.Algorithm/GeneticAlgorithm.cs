@@ -1,55 +1,53 @@
 ﻿using KnapsackGenetic.Algorithm.Contracts;
 using KnapsackGenetic.Domain;
-using System;
+using KnapsackGenetic.Providers.Contracts;
 using System.Collections.Generic;
 
 namespace KnapsackGenetic.Algorithm
 {
-    public class GeneticAlgorithm : IGeneticAlgorithm
+    public class GeneticAlgorithm
     {
+        private readonly IInitialPopulationProvider initialPopulationProvider;
+        private readonly IFitnessFunction fitnessFunction;
+        private readonly ISelectionOperator selectionOperator;
+        private readonly ISelectionOperator elitistSelection;
+
         private readonly List<Item> items;
+        private readonly int weightLimit;
         private readonly int numberOfGenes;
-        private readonly int initialPopulationSize;
 
         private List<Individual> currentPopulation;
-        private readonly static Random random = new Random();
+        private List<Solution> currentSolutions;
 
-        public GeneticAlgorithm(List<Item> items, int initialPopulationSize)
+        public GeneticAlgorithm(List<Item> items, int weightLimit, int initialPopulationSize,
+            IInitialPopulationProvider initialPopulationProvider,
+            IFitnessFunction fitnessFunction, 
+            ISelectionOperator selectionOperator, 
+            ISelectionOperator elitistSelection)
         {
             this.items = items;
-            this.initialPopulationSize = initialPopulationSize;
+            this.weightLimit = weightLimit;
+            this.initialPopulationProvider = initialPopulationProvider;
+            this.fitnessFunction = fitnessFunction;
+            this.selectionOperator = selectionOperator;
+            this.elitistSelection = elitistSelection;
 
             numberOfGenes = items.Count;
-            currentPopulation = GetInitialPopulation(initialPopulationSize);
+            currentPopulation = initialPopulationProvider.GetInitialPopulation(initialPopulationSize, numberOfGenes);
+            currentSolutions = GetCurrentSolutions();
         }
 
-        public void PerformOneGeneration()
+        private List<Solution> GetCurrentSolutions()
         {
-            throw new NotImplementedException();
-        }
+            var solutions = new List<Solution>();
+            foreach (var individual in currentPopulation)
+                solutions.Add(new Solution
+                {
+                    Individual = individual,
+                    FitnessScore = fitnessFunction.GetFitnessScore(individual, weightLimit, items)
+                });
 
-        private List<Individual> GetInitialPopulation(int populationSize)
-        {
-            var initialPopulation = new List<Individual>();
-
-            for (int i = 0; i < populationSize; i++)
-                initialPopulation.Add(GetRandomIndividual());
-
-            return initialPopulation;
-        }
-
-        private Individual GetRandomIndividual()
-        {
-            var randomGenes = new byte[numberOfGenes];
-
-            for (int i = 0; i < numberOfGenes; i++)
-                randomGenes[i] = (byte)random.Next(2);
-
-            return new Individual
-            {
-                Genes = randomGenes
-            };
-
+            return solutions;
         }
     }
 }

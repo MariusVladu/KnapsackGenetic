@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KnapsackGenetic.Domain\KnapsackGenetic.Domain.csproj" />
-    <ProjectReference Include="..\KnapsackGenetic.Providers\KnapsackGenetic.Providers.csproj" />
   </ItemGroup>
 
 </Project>
