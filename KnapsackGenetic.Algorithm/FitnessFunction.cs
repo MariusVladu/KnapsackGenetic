@@ -13,7 +13,7 @@ namespace KnapsackGenetic.Algorithm
             
             for (int i = 0; i < items.Count; i++)
             {
-                if (individual.Genes[i] == 1)
+                if (individual.Genes[i] == true)
                 {
                     score += items[i].Value;
                     totalWeight += items[i].Weight;

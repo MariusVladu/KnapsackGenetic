@@ -7,44 +7,41 @@ namespace KnapsackGenetic.Algorithm
 {
     public class GeneticAlgorithm
     {
-        private readonly IInitialPopulationProvider initialPopulationProvider;
         private readonly IFitnessFunction fitnessFunction;
         private readonly ISelectionOperator selectionOperator;
         private readonly ISelectionOperator elitistSelection;
         private readonly ICrossoverOperator crossoverOperator;
+        private readonly IMutationOperator mutationOperator;
 
-        private readonly List<Item> items;
-        private readonly int weightLimit;
-        private readonly int numberOfGenes;
-        private readonly double crossoverRate;
+        private readonly Settings settings;
 
         private List<Individual> currentPopulation;
         private List<Solution> currentSolutions;
 
-        public GeneticAlgorithm(List<Item> items, int weightLimit, double crossoverRate, int initialPopulationSize,
+        public GeneticAlgorithm(Settings settings,
             IInitialPopulationProvider initialPopulationProvider,
             IFitnessFunction fitnessFunction,
             ISelectionOperator selectionOperator,
-            ISelectionOperator elitistSelection, 
-            ICrossoverOperator crossoverOperator)
+            ISelectionOperator elitistSelection,
+            ICrossoverOperator crossoverOperator,
+            IMutationOperator mutationOperator)
         {
-            this.items = items;
-            this.weightLimit = weightLimit;
-            this.crossoverRate = crossoverRate;
-            this.initialPopulationProvider = initialPopulationProvider;
+            this.settings = settings;
             this.fitnessFunction = fitnessFunction;
             this.selectionOperator = selectionOperator;
             this.elitistSelection = elitistSelection;
             this.crossoverOperator = crossoverOperator;
+            this.mutationOperator = mutationOperator;
 
-            numberOfGenes = items.Count;
-            currentPopulation = initialPopulationProvider.GetInitialPopulation(initialPopulationSize, numberOfGenes);
+            currentPopulation = initialPopulationProvider.GetInitialPopulation(settings.InitialPopulationSize, settings.NumberOfGenes);
             currentSolutions = GetCurrentSolutions();
         }
 
         public List<Solution> ComputeNextGeneration()
         {
-            var numberOfCrossovers = currentSolutions.Count / 2 - 2;
+            var nextGeneration = new List<Individual>();
+
+            var numberOfCrossovers = currentSolutions.Count / 2 - settings.NumberOfElites;
 
             for (int i = 0; i < numberOfCrossovers; i++)
             {
@@ -54,8 +51,31 @@ namespace KnapsackGenetic.Algorithm
                 var parent2 = selectionOperator.SelectOne(currentSolutions);
                 RemoveFromCurrentSolutions(parent2);
 
-                var offsprings = crossoverOperator.GetOffsprings(parent1, parent2, crossoverRate);
+                var offsprings = crossoverOperator.GetOffsprings(parent1, parent2, settings.CrossoverRate);
 
+                mutationOperator.ApplyMutation(offsprings.Item1, settings.MutationRate);
+                mutationOperator.ApplyMutation(offsprings.Item2, settings.MutationRate);
+
+                nextGeneration.Add(offsprings.Item1);
+                nextGeneration.Add(offsprings.Item2);
+            }
+
+            AddFirstTwoRemainingElites(nextGeneration);
+
+            currentPopulation = nextGeneration;
+            currentSolutions = GetCurrentSolutions();
+
+            return currentSolutions;
+        }
+
+        private void AddFirstTwoRemainingElites(List<Individual> nextGeneration)
+        {
+            for (int i = 0; i < settings.NumberOfElites; i++)
+            {
+                var elite = elitistSelection.SelectOne(currentSolutions);
+                RemoveFromCurrentSolutions(elite);
+
+                nextGeneration.Add(elite);
             }
         }
 
@@ -73,7 +93,7 @@ namespace KnapsackGenetic.Algorithm
                 solutions.Add(new Solution
                 {
                     Individual = individual,
-                    FitnessScore = fitnessFunction.GetFitnessScore(individual, weightLimit, items)
+                    FitnessScore = fitnessFunction.GetFitnessScore(individual, settings.WeightLimit, settings.Items)
                 });
 
             return solutions;

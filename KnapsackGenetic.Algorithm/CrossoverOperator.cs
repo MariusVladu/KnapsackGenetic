@@ -11,8 +11,8 @@ namespace KnapsackGenetic.Algorithm
             var numberOfGenes = parent1.Genes.Length;
             var splitIndex = (int)(numberOfGenes * crossoverRate);
 
-            var offspring1 = new Individual { Genes = new byte[numberOfGenes] };
-            var offspring2 = new Individual { Genes = new byte[numberOfGenes] };
+            var offspring1 = new Individual { Genes = new bool[numberOfGenes] };
+            var offspring2 = new Individual { Genes = new bool[numberOfGenes] };
 
             for (int i = 0; i < numberOfGenes; i++)
             {

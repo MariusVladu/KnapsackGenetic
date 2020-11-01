@@ -2,6 +2,6 @@
 {
     public class Individual
     {
-        public byte[] Genes { get; set; }
+        public bool[] Genes { get; set; }
     }
 }

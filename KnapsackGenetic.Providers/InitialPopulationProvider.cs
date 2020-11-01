@@ -21,10 +21,10 @@ namespace KnapsackGenetic.Providers
 
         private Individual GetRandomIndividual(int numberOfGenes)
         {
-            var randomGenes = new byte[numberOfGenes];
+            var randomGenes = new bool[numberOfGenes];
 
             for (int i = 0; i < numberOfGenes; i++)
-                randomGenes[i] = (byte)random.Next(2);
+                randomGenes[i] = random.Next(2) % 2 == 1;
 
             return new Individual
             {
