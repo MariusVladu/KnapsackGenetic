@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.Algorithm", "KnapsackGenetic.Algorithm\KnapsackGenetic.Algorithm.csproj", "{DDAFCD49-0BFC-4A4A-A17B-798C76A46155}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.Domain", "KnapsackGenetic.Domain\KnapsackGenetic.Domain.csproj", "{00077077-A83C-4425-9BB2-C7AA39D62CAE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DDAFCD49-0BFC-4A4A-A17B-798C76A46155}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDAFCD49-0BFC-4A4A-A17B-798C76A46155}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDAFCD49-0BFC-4A4A-A17B-798C76A46155}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDAFCD49-0BFC-4A4A-A17B-798C76A46155}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00077077-A83C-4425-9BB2-C7AA39D62CAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00077077-A83C-4425-9BB2-C7AA39D62CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00077077-A83C-4425-9BB2-C7AA39D62CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00077077-A83C-4425-9BB2-C7AA39D62CAE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E1752193-C3C6-481A-A798-D1366D4F22AD}
+	EndGlobalSection
+EndGlobal
