@@ -9,6 +9,7 @@ namespace KnapsackGenetic.Domain
         public int WeightLimit { get; set; }
         public int NumberOfElites { get; set; }
         public int InitialPopulationSize { get; set; }
+        public int MaxPopulationSize { get; set; }
         public double CrossoverRate { get; set; }
         public double MutationRate { get; set; }
     }

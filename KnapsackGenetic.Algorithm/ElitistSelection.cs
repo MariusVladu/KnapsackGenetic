@@ -5,11 +5,16 @@ using System.Linq;
 
 namespace KnapsackGenetic.Algorithm
 {
-    public class ElitistSelection : ISelectionOperator
+    public class ElitistSelection : IElitistSelection
     {
-        public Individual SelectOne(List<Solution> solutions)
+        public List<Solution> SelectMany(int n, List<Solution> solutions)
         {
-            return solutions.OrderByDescending(s => s.FitnessScore).First().Individual;
+            return solutions.OrderByDescending(s => s.FitnessScore).Take(n).ToList();
+        }
+
+        Solution IElitistSelection.SelectOne(List<Solution> solutions)
+        {
+            return solutions.OrderByDescending(s => s.FitnessScore).First();
         }
     }
 }

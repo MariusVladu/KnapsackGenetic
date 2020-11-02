@@ -11,7 +11,7 @@ namespace KnapsackGenetic.Algorithm
     {
         private readonly IFitnessFunction fitnessFunction;
         private readonly ISelectionOperator selectionOperator;
-        private readonly ISelectionOperator elitistSelection;
+        private readonly IElitistSelection elitistSelection;
         private readonly ICrossoverOperator crossoverOperator;
         private readonly IMutationOperator mutationOperator;
         private static readonly Random random = new Random();
@@ -28,7 +28,7 @@ namespace KnapsackGenetic.Algorithm
             IInitialPopulationProvider initialPopulationProvider,
             IFitnessFunction fitnessFunction,
             ISelectionOperator selectionOperator,
-            ISelectionOperator elitistSelection,
+            IElitistSelection elitistSelection,
             ICrossoverOperator crossoverOperator,
             IMutationOperator mutationOperator)
         {
@@ -47,9 +47,7 @@ namespace KnapsackGenetic.Algorithm
         {
             var nextGeneration = new List<Individual>();
 
-            var numberOfCrossovers = CurrentSolutions.Count / 2;
-
-            for (int i = 0; i < numberOfCrossovers; i++)
+            while (nextGeneration.Count < settings.MaxPopulationSize)
             {
                 var parent1 = selectionOperator.SelectOne(CurrentSolutions);
                 var parent2 = selectionOperator.SelectOne(CurrentSolutions);
@@ -59,8 +57,8 @@ namespace KnapsackGenetic.Algorithm
                 mutationOperator.ApplyMutation(offsprings.Item1, settings.MutationRate);
                 mutationOperator.ApplyMutation(offsprings.Item2, settings.MutationRate);
 
-                nextGeneration.Add(offsprings.Item1);
-                nextGeneration.Add(offsprings.Item2);
+                AddIfNotDupplicate(nextGeneration, offsprings.Item1);
+                AddIfNotDupplicate(nextGeneration, offsprings.Item2);
             }
 
             AddElites(nextGeneration);
@@ -71,41 +69,30 @@ namespace KnapsackGenetic.Algorithm
             return CurrentSolutions;
         }
 
+        private void AddElites(List<Individual> nextGeneration)
+        {
+            for (int i = 0; i <= settings.NumberOfElites; i++)
+                nextGeneration.RemoveAt(random.Next(nextGeneration.Count));
+
+            var elitesToAdd = elitistSelection.SelectMany(settings.NumberOfElites, CurrentSolutions);
+
+            nextGeneration.AddRange(elitesToAdd.Select(x => x.Individual));
+        }
+
+        private void AddIfNotDupplicate(List<Individual> nextGeneration, Individual offspring)
+        {
+            if (!nextGeneration.Any(x => x .Equals(offspring)))
+            {
+                nextGeneration.Add(offspring);
+            }
+        }
+
         private void ComputeCurrentGenerationData()
         {
             CurrentGenerationNumber++;
             CurrentSolutions = GetCurrentSolutions();
-            ComputeAverageScore();
-            ComputeCurrentBestSolution();
-        }
-
-        private void AddElites(List<Individual> nextGeneration)
-        {
-            for (int i = 0; i <= settings.NumberOfElites; i++)
-            {
-                var elite = elitistSelection.SelectOne(CurrentSolutions);
-
-                nextGeneration.RemoveAt(random.Next(nextGeneration.Count));
-
-                nextGeneration.Add(elite);
-            }
-        }
-
-        private void ComputeAverageScore()
-        {
             AverageScore = CurrentSolutions.Average(s => s.FitnessScore);
-        }
-
-        private void ComputeCurrentBestSolution()
-        {
             CurrentBestSolution = CurrentSolutions.OrderByDescending(s => s.FitnessScore).First();
-        }
-
-        private void RemoveFromCurrentSolutions(Individual individual)
-        {
-            var indexToRemove = CurrentSolutions.FindIndex(s => s.Individual == individual);
-
-            CurrentSolutions.RemoveAt(indexToRemove);
         }
 
         private List<Solution> GetCurrentSolutions()

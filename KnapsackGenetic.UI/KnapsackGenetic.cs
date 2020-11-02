@@ -6,7 +6,6 @@ using KnapsackGenetic.Providers.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace KnapsackGenetic.UI
@@ -16,7 +15,7 @@ namespace KnapsackGenetic.UI
         private GeneticAlgorithm geneticAlgorithm;
         private IFitnessFunction fitnessFunction;
         private ISelectionOperator selectionOperator;
-        private ISelectionOperator elitistSelection;
+        private IElitistSelection elitistSelection;
         private ICrossoverOperator crossoverOperator;
         private IMutationOperator mutationOperator;
         private IInitialPopulationProvider initialPopulationProvider;
@@ -24,8 +23,9 @@ namespace KnapsackGenetic.UI
 
         private int numberOfGenes;
         private int weightLimit = 30;
-        private int numberOfElites = 1;
+        private int numberOfElites = 2;
         private int initialPopulationSize = 50;
+        private int maxPopulationSize = 50;
         private double crossoverRate = 0.5;
         private double mutationRate = 0.05;
 
@@ -38,25 +38,11 @@ namespace KnapsackGenetic.UI
             InitializeComponent();
 
             fitnessFunction = new FitnessFunction();
-            selectionOperator = new RouletteWheelSelection();
+            selectionOperator = new TournamentSelection(4);
             elitistSelection = new ElitistSelection();
             crossoverOperator = new CrossoverOperator();
             mutationOperator = new MutationOperator();
             initialPopulationProvider = new InitialPopulationProvider();
-
-            var items = GetItems();
-            numberOfGenes = items.Count;
-
-            settings = new Settings
-            {
-                Items = GetItems(),
-                NumberOfGenes = numberOfGenes,
-                WeightLimit = weightLimit,
-                NumberOfElites = numberOfElites,
-                InitialPopulationSize = initialPopulationSize,
-                CrossoverRate = crossoverRate,
-                MutationRate = mutationRate
-            };
 
             InitializeGeneticAlgorithm();
 
@@ -69,6 +55,21 @@ namespace KnapsackGenetic.UI
 
         private void InitializeGeneticAlgorithm()
         {
+            var items = GetItems();
+            numberOfGenes = items.Count;
+
+            settings = new Settings
+            {
+                Items = GetItems(),
+                NumberOfGenes = numberOfGenes,
+                WeightLimit = weightLimit,
+                NumberOfElites = numberOfElites,
+                InitialPopulationSize = initialPopulationSize,
+                MaxPopulationSize = maxPopulationSize,
+                CrossoverRate = crossoverRate,
+                MutationRate = mutationRate
+            };
+
             geneticAlgorithm = new GeneticAlgorithm(settings, initialPopulationProvider, fitnessFunction, selectionOperator, elitistSelection, crossoverOperator, mutationOperator);
 
             generationsPlotData = new List<double>();

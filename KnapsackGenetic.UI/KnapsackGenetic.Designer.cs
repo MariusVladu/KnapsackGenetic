@@ -123,7 +123,7 @@
             this.Controls.Add(this.chartAverageScore);
             this.Controls.Add(this.buttonNextGeneration);
             this.Name = "KnapsackGenetic";
-            this.Text = "Best Solution: ";
+            this.Text = "KnapsackGenetic";
             ((System.ComponentModel.ISupportInitialize)(this.inputGenerationsNumber)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
