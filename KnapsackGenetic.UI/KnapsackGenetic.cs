@@ -21,13 +21,7 @@ namespace KnapsackGenetic.UI
         private IInitialPopulationProvider initialPopulationProvider;
         private Settings settings;
 
-        private int numberOfGenes;
         private int weightLimit = 30;
-        private int numberOfElites = 2;
-        private int initialPopulationSize = 50;
-        private int maxPopulationSize = 50;
-        private double crossoverRate = 0.5;
-        private double mutationRate = 0.05;
 
         private List<double> generationsPlotData;
         private List<double> averageScorePlotData;
@@ -38,7 +32,7 @@ namespace KnapsackGenetic.UI
             InitializeComponent();
 
             fitnessFunction = new FitnessFunction();
-            selectionOperator = new TournamentSelection(4);
+            selectionOperator = new TournamentSelection(Convert.ToInt32(inputTournamentSize.Value));
             elitistSelection = new ElitistSelection();
             crossoverOperator = new CrossoverOperator();
             mutationOperator = new MutationOperator();
@@ -56,19 +50,20 @@ namespace KnapsackGenetic.UI
         private void InitializeGeneticAlgorithm()
         {
             var items = GetItems();
-            numberOfGenes = items.Count;
 
             settings = new Settings
             {
                 Items = GetItems(),
-                NumberOfGenes = numberOfGenes,
+                NumberOfGenes = items.Count,
                 WeightLimit = weightLimit,
-                NumberOfElites = numberOfElites,
-                InitialPopulationSize = initialPopulationSize,
-                MaxPopulationSize = maxPopulationSize,
-                CrossoverRate = crossoverRate,
-                MutationRate = mutationRate
+                NumberOfElites = Convert.ToInt32(inputElites.Value),
+                InitialPopulationSize = Convert.ToInt32(inputMaxPopulation.Value),
+                MaxPopulationSize = Convert.ToInt32(inputMaxPopulation.Value),
+                CrossoverRate = Convert.ToDouble(inputCrossoverRate.Value),
+                MutationRate = Convert.ToDouble(inputMutationRate.Value)
             };
+
+            selectionOperator = new TournamentSelection(Convert.ToInt32(inputTournamentSize.Value));
 
             geneticAlgorithm = new GeneticAlgorithm(settings, initialPopulationProvider, fitnessFunction, selectionOperator, elitistSelection, crossoverOperator, mutationOperator);
 
@@ -132,7 +127,7 @@ namespace KnapsackGenetic.UI
         {
             var generationNumberString = geneticAlgorithm.CurrentGenerationNumber.ToString().PadLeft(4, '0'); ;
             var averageScore2DecimalPlaces = string.Format("{0:00.00}", geneticAlgorithm.AverageScore);
-            labelGenerationInfo.Text = $"Generation #{generationNumberString}\nAverage: {averageScore2DecimalPlaces}\nBest Solution: {geneticAlgorithm.CurrentBestSolution}";
+            labelGenerationInfo.Text = $"Generation #{generationNumberString}\nAverage: {averageScore2DecimalPlaces}\nBest Solution: {geneticAlgorithm.CurrentBestSolution}\nBest Score: {geneticAlgorithm.CurrentBestSolution.FitnessScore}";
         }
 
         private void buttonRun_Click(object sender, EventArgs e)
@@ -148,6 +143,12 @@ namespace KnapsackGenetic.UI
                 if (i % 50 == 0) Plot();
             }
 
+            Plot();
+        }
+
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            InitializeGeneticAlgorithm();
             Plot();
         }
     }
