@@ -47,12 +47,17 @@
             this.label6 = new System.Windows.Forms.Label();
             this.inputTournamentSize = new System.Windows.Forms.NumericUpDown();
             this.buttonReset = new System.Windows.Forms.Button();
+            this.inputWeightLimit = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.inputItems = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.inputGenerationsNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputMutationRate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputCrossoverRate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputMaxPopulation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputElites)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputTournamentSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputWeightLimit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputItems)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonNextGeneration
@@ -303,11 +308,49 @@
             this.buttonReset.UseVisualStyleBackColor = true;
             this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
+            // inputWeightLimit
+            // 
+            this.inputWeightLimit.Location = new System.Drawing.Point(712, 360);
+            this.inputWeightLimit.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.inputWeightLimit.Name = "inputWeightLimit";
+            this.inputWeightLimit.Size = new System.Drawing.Size(71, 23);
+            this.inputWeightLimit.TabIndex = 5;
+            this.inputWeightLimit.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(603, 362);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(75, 15);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "Weight Limit";
+            // 
+            // inputItems
+            // 
+            this.inputItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.inputItems.Location = new System.Drawing.Point(603, 389);
+            this.inputItems.Name = "inputItems";
+            this.inputItems.Size = new System.Drawing.Size(261, 282);
+            this.inputItems.TabIndex = 8;
+            this.inputItems.Text = "dataGridView1";
+            // 
             // KnapsackGenetic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 736);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.inputWeightLimit);
+            this.Controls.Add(this.inputItems);
             this.Controls.Add(this.buttonReset);
             this.Controls.Add(this.inputTournamentSize);
             this.Controls.Add(this.label6);
@@ -334,6 +377,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.inputMaxPopulation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputElites)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputTournamentSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputWeightLimit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputItems)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -359,6 +404,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown inputTournamentSize;
         private System.Windows.Forms.Button buttonReset;
+        private System.Windows.Forms.DataGridView inputItems;
+        private System.Windows.Forms.NumericUpDown inputWeightLimit;
+        private System.Windows.Forms.Label label7;
     }
 }
 

@@ -5,6 +5,8 @@ using KnapsackGenetic.Providers;
 using KnapsackGenetic.Providers.Contracts;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -21,7 +23,7 @@ namespace KnapsackGenetic.UI
         private IInitialPopulationProvider initialPopulationProvider;
         private Settings settings;
 
-        private int weightLimit = 30;
+        private DataTable itemsTable;
 
         private List<double> generationsPlotData;
         private List<double> averageScorePlotData;
@@ -30,6 +32,11 @@ namespace KnapsackGenetic.UI
         public KnapsackGenetic()
         {
             InitializeComponent();
+
+            itemsTable = new DataTable();
+            itemsTable.Columns.Add("Weight");
+            itemsTable.Columns.Add("Value");
+            DisplayItems();
 
             fitnessFunction = new FitnessFunction();
             selectionOperator = new TournamentSelection(Convert.ToInt32(inputTournamentSize.Value));
@@ -47,15 +54,43 @@ namespace KnapsackGenetic.UI
             Plot();
         }
 
+        private void DisplayItems()
+        {
+            var items = GetInitialItems();
+
+            foreach (var item in items)
+            {
+                itemsTable.Rows.Add(item.Weight, item.Value);
+            }
+
+            inputItems.DataSource = itemsTable;
+        }
+
+        private List<Item> GetItemsList()
+        {
+            var items = new List<Item>();
+
+            foreach (DataRow row in itemsTable.Rows)
+            {
+                items.Add(new Item
+                {
+                    Weight = Convert.ToInt32(row["Weight"]),
+                    Value = Convert.ToInt32(row["Value"])
+                });
+            }
+
+            return items;
+        }
+
         private void InitializeGeneticAlgorithm()
         {
-            var items = GetItems();
+            var items = GetItemsList();
 
             settings = new Settings
             {
-                Items = GetItems(),
+                Items = items,
                 NumberOfGenes = items.Count,
-                WeightLimit = weightLimit,
+                WeightLimit = Convert.ToInt32(inputWeightLimit.Value),
                 NumberOfElites = Convert.ToInt32(inputElites.Value),
                 InitialPopulationSize = Convert.ToInt32(inputMaxPopulation.Value),
                 MaxPopulationSize = Convert.ToInt32(inputMaxPopulation.Value),
@@ -71,24 +106,6 @@ namespace KnapsackGenetic.UI
             averageScorePlotData = new List<double>();
             bestScorePlotData = new List<double>();
             UpdatePlotData();
-        }
-
-        private List<Item> GetItems()
-        {
-            return new List<Item>
-            {
-                new Item{ Weight = 7, Value = 5},
-                new Item{ Weight = 2, Value = 4},
-                new Item{ Weight = 1, Value = 7},
-                new Item{ Weight = 9, Value = 2},
-                new Item{ Weight = 20, Value = 5},
-                new Item{ Weight = 11, Value = 6},
-                new Item{ Weight = 2, Value = 6},
-                new Item{ Weight = 15, Value = 10},
-                new Item{ Weight = 3, Value = 1},
-                new Item{ Weight = 4, Value = 2},
-                new Item{ Weight = 8, Value = 6},
-            };
         }
 
         private void buttonNextGeneration_Click(object sender, EventArgs e)
@@ -150,6 +167,24 @@ namespace KnapsackGenetic.UI
         {
             InitializeGeneticAlgorithm();
             Plot();
+        }
+
+        private List<Item> GetInitialItems()
+        {
+            return new List<Item>
+            {
+                new Item{ Weight = 7, Value = 5},
+                new Item{ Weight = 2, Value = 4},
+                new Item{ Weight = 1, Value = 7},
+                new Item{ Weight = 9, Value = 2},
+                new Item{ Weight = 20, Value = 5},
+                new Item{ Weight = 11, Value = 6},
+                new Item{ Weight = 2, Value = 6},
+                new Item{ Weight = 15, Value = 10},
+                new Item{ Weight = 3, Value = 1},
+                new Item{ Weight = 4, Value = 2},
+                new Item{ Weight = 8, Value = 6},
+            };
         }
     }
 }
