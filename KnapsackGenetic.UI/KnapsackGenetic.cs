@@ -1,13 +1,16 @@
 ﻿using KnapsackGenetic.Algorithm;
 using KnapsackGenetic.Algorithm.Contracts;
 using KnapsackGenetic.Domain;
+using KnapsackGenetic.Greedy;
 using KnapsackGenetic.Providers;
 using KnapsackGenetic.Providers.Contracts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace KnapsackGenetic.UI
@@ -151,9 +154,13 @@ namespace KnapsackGenetic.UI
         {
             InitializeGeneticAlgorithm();
 
+            var stopwatch = new Stopwatch();
+
             for (int i = 0; i < inputGenerationsNumber.Value; i++)
             {
+                stopwatch.Start();
                 geneticAlgorithm.ComputeNextGeneration();
+                stopwatch.Stop();
 
                 UpdatePlotData();
 
@@ -161,6 +168,7 @@ namespace KnapsackGenetic.UI
             }
 
             Plot();
+            DisplayEllapsedTime(stopwatch.Elapsed);
         }
 
         private void buttonReset_Click(object sender, EventArgs e)
@@ -183,8 +191,34 @@ namespace KnapsackGenetic.UI
                 new Item{ Weight = 15, Value = 10},
                 new Item{ Weight = 3, Value = 1},
                 new Item{ Weight = 4, Value = 2},
-                new Item{ Weight = 8, Value = 6},
+                new Item{ Weight = 8, Value = 5},
             };
+        }
+
+        private void buttonGreedySolution_Click(object sender, EventArgs e)
+        {
+            var knapsackGreedy = new KnapsackGreedy();
+            var items = GetItemsList();
+            var weightLimit = Convert.ToInt32(inputWeightLimit.Value);
+
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            var solution = knapsackGreedy.Solve(items, weightLimit);
+
+            stopwatch.Stop();
+            
+            var totalValue = 0;
+            for (int i = 0; i < solution.Length; i++)
+                if(solution[i] == true)
+                    totalValue += items[i].Value;
+            labelGenerationInfo.Text = $"Greedy solution: {string.Join(", ", solution.Select(x => x ? 1 : 0))}\nTotal Value: {totalValue}";
+            DisplayEllapsedTime(stopwatch.Elapsed);
+        }
+
+        private void DisplayEllapsedTime(TimeSpan elapsedTime)
+        {
+            labelGenerationInfo.Text += $"\nElapsed Time: {elapsedTime.TotalMilliseconds} ms";
         }
     }
 }

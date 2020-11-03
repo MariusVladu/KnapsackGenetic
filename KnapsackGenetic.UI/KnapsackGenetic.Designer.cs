@@ -50,6 +50,7 @@
             this.inputWeightLimit = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.inputItems = new System.Windows.Forms.DataGridView();
+            this.buttonGreedySolution = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.inputGenerationsNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputMutationRate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputCrossoverRate)).BeginInit();
@@ -134,7 +135,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(603, 248);
+            this.label2.Location = new System.Drawing.Point(603, 316);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(94, 15);
             this.label2.TabIndex = 4;
@@ -148,7 +149,7 @@
             0,
             0,
             65536});
-            this.inputMutationRate.Location = new System.Drawing.Point(712, 217);
+            this.inputMutationRate.Location = new System.Drawing.Point(712, 285);
             this.inputMutationRate.Maximum = new decimal(new int[] {
             1,
             0,
@@ -171,7 +172,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(603, 219);
+            this.label3.Location = new System.Drawing.Point(603, 287);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(82, 15);
             this.label3.TabIndex = 4;
@@ -185,7 +186,7 @@
             0,
             0,
             65536});
-            this.inputCrossoverRate.Location = new System.Drawing.Point(712, 188);
+            this.inputCrossoverRate.Location = new System.Drawing.Point(712, 256);
             this.inputCrossoverRate.Maximum = new decimal(new int[] {
             1,
             0,
@@ -208,7 +209,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(603, 190);
+            this.label4.Location = new System.Drawing.Point(603, 258);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(85, 15);
             this.label4.TabIndex = 4;
@@ -216,7 +217,7 @@
             // 
             // inputMaxPopulation
             // 
-            this.inputMaxPopulation.Location = new System.Drawing.Point(712, 159);
+            this.inputMaxPopulation.Location = new System.Drawing.Point(712, 227);
             this.inputMaxPopulation.Maximum = new decimal(new int[] {
             255,
             0,
@@ -239,7 +240,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(603, 161);
+            this.label5.Location = new System.Drawing.Point(603, 229);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(91, 15);
             this.label5.TabIndex = 4;
@@ -247,7 +248,7 @@
             // 
             // inputElites
             // 
-            this.inputElites.Location = new System.Drawing.Point(712, 130);
+            this.inputElites.Location = new System.Drawing.Point(712, 198);
             this.inputElites.Maximum = new decimal(new int[] {
             255,
             0,
@@ -270,7 +271,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(603, 132);
+            this.label6.Location = new System.Drawing.Point(603, 200);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(44, 15);
             this.label6.TabIndex = 4;
@@ -278,7 +279,7 @@
             // 
             // inputTournamentSize
             // 
-            this.inputTournamentSize.Location = new System.Drawing.Point(712, 246);
+            this.inputTournamentSize.Location = new System.Drawing.Point(712, 314);
             this.inputTournamentSize.Maximum = new decimal(new int[] {
             255,
             0,
@@ -343,11 +344,22 @@
             this.inputItems.TabIndex = 8;
             this.inputItems.Text = "dataGridView1";
             // 
+            // buttonGreedySolution
+            // 
+            this.buttonGreedySolution.Location = new System.Drawing.Point(760, 10);
+            this.buttonGreedySolution.Name = "buttonGreedySolution";
+            this.buttonGreedySolution.Size = new System.Drawing.Size(104, 23);
+            this.buttonGreedySolution.TabIndex = 9;
+            this.buttonGreedySolution.Text = "Greedy Solution";
+            this.buttonGreedySolution.UseVisualStyleBackColor = true;
+            this.buttonGreedySolution.Click += new System.EventHandler(this.buttonGreedySolution_Click);
+            // 
             // KnapsackGenetic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 736);
+            this.Controls.Add(this.buttonGreedySolution);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.inputWeightLimit);
             this.Controls.Add(this.inputItems);
@@ -407,6 +419,7 @@
         private System.Windows.Forms.DataGridView inputItems;
         private System.Windows.Forms.NumericUpDown inputWeightLimit;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button buttonGreedySolution;
     }
 }
 

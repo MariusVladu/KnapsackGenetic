@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\KnapsackGenetic.Algorithm\KnapsackGenetic.Algorithm.csproj" />
     <ProjectReference Include="..\KnapsackGenetic.Domain\KnapsackGenetic.Domain.csproj" />
+    <ProjectReference Include="..\KnapsackGenetic.Greedy\KnapsackGenetic.Greedy.csproj" />
   </ItemGroup>
 
 </Project>

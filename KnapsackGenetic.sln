@@ -3,21 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.Algorithm", "KnapsackGenetic.Algorithm\KnapsackGenetic.Algorithm.csproj", "{DDAFCD49-0BFC-4A4A-A17B-798C76A46155}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnapsackGenetic.Algorithm", "KnapsackGenetic.Algorithm\KnapsackGenetic.Algorithm.csproj", "{DDAFCD49-0BFC-4A4A-A17B-798C76A46155}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.Domain", "KnapsackGenetic.Domain\KnapsackGenetic.Domain.csproj", "{00077077-A83C-4425-9BB2-C7AA39D62CAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnapsackGenetic.Domain", "KnapsackGenetic.Domain\KnapsackGenetic.Domain.csproj", "{00077077-A83C-4425-9BB2-C7AA39D62CAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.Providers", "KnapsackGenetic.Providers\KnapsackGenetic.Providers.csproj", "{FD0E11A1-8A4E-46EB-BF64-5F74B33C6148}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnapsackGenetic.Providers", "KnapsackGenetic.Providers\KnapsackGenetic.Providers.csproj", "{FD0E11A1-8A4E-46EB-BF64-5F74B33C6148}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4162EB8F-E53B-472D-9DE8-1046C9F6ACF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.Providers.UnitTests", "Tests\KnapsackGenetic.Providers.UnitTests\KnapsackGenetic.Providers.UnitTests.csproj", "{AA0AFCEE-8C15-46DE-B798-7E91084DF921}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnapsackGenetic.Providers.UnitTests", "Tests\KnapsackGenetic.Providers.UnitTests\KnapsackGenetic.Providers.UnitTests.csproj", "{AA0AFCEE-8C15-46DE-B798-7E91084DF921}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.Algorithm.UnitTests", "Tests\KnapsackGenetic.Algorithm.UnitTests\KnapsackGenetic.Algorithm.UnitTests.csproj", "{0AA7060B-790E-4CE1-A7BE-2BEA221F3747}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnapsackGenetic.Algorithm.UnitTests", "Tests\KnapsackGenetic.Algorithm.UnitTests\KnapsackGenetic.Algorithm.UnitTests.csproj", "{0AA7060B-790E-4CE1-A7BE-2BEA221F3747}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.Tests.Common", "Tests\KnapsackGenetic.Tests.Common\KnapsackGenetic.Tests.Common.csproj", "{3F0195B6-1DE9-4B3B-9CF2-C23071827DD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnapsackGenetic.Tests.Common", "Tests\KnapsackGenetic.Tests.Common\KnapsackGenetic.Tests.Common.csproj", "{3F0195B6-1DE9-4B3B-9CF2-C23071827DD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.UI", "KnapsackGenetic.UI\KnapsackGenetic.UI.csproj", "{32F79AB5-36CD-4F8C-A781-0432915D80A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnapsackGenetic.UI", "KnapsackGenetic.UI\KnapsackGenetic.UI.csproj", "{32F79AB5-36CD-4F8C-A781-0432915D80A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackGenetic.Greedy", "KnapsackGenetic.Greedy\KnapsackGenetic.Greedy.csproj", "{B0A913A2-01EB-44B2-9484-ED14AF64BA50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{32F79AB5-36CD-4F8C-A781-0432915D80A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32F79AB5-36CD-4F8C-A781-0432915D80A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32F79AB5-36CD-4F8C-A781-0432915D80A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0A913A2-01EB-44B2-9484-ED14AF64BA50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0A913A2-01EB-44B2-9484-ED14AF64BA50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0A913A2-01EB-44B2-9484-ED14AF64BA50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0A913A2-01EB-44B2-9484-ED14AF64BA50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
